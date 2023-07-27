@@ -1,11 +1,10 @@
-import JsonAgencias from './data/Agencias.json';
 import { agenciaType, listaDeAgenciasType} from './types/types'
 
 
-export const mapearListaDeAgencias = () => {
+export const mapearListaDeAgencias = (agencias) => {
     let lista : listaDeAgenciasType[] = []
 
-    JsonAgencias.map( (agencia : agenciaType)  => {
+    agencias.map( (agencia : agenciaType)  => {
         lista = [...lista, 
         { id: agencia.id, 
           agencia : agencia.ciudad, 

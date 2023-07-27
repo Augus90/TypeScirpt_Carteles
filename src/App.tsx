@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import { agenciaType, listaDeAgenciasType} from './types/types'
 import { mapearListaDeAgencias } from './TraerAgencias'
 import JsonAgencias from './data/Agencias.json'
+import { ImporData } from './data/importData'
+
 
 function App() {
 
@@ -20,14 +22,39 @@ function App() {
   )
 
 const [ListaDeAgencias, setListaDeAgencias] = useState<listaDeAgenciasType[]>([])
-
+const fileUpload = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    setListaDeAgencias( mapearListaDeAgencias() );
+    // setListaDeAgencias( mapearListaDeAgencias() );
 
     setAgencia(JsonAgencias[0])
+
+    // ImporData()
   },[])
 
+  const fillSelect = (data : agenciaType[]) => {
+    console.log("Ciudad 1", data )
+
+    mapearListaDeAgencias(data);
+  }
+
+  const handleSelect = (e : React.ChangeEvent<HTMLSelectElement>) => {
+    console.log("Select", e.target.value)
+  }
+
+  const handleUpload = async () => {
+    // console.log(fileUpload.current?.files);
+    const files = fileUpload.current?.files[0]
+
+    if(files?.length == 0){
+      console.error("Error")
+    }
+
+    const data : agenciaType[] = await ImporData(files);
+    data.shift()
+    fillSelect(data);
+    
+  }
 
   return (
     <>
@@ -39,10 +66,18 @@ const [ListaDeAgencias, setListaDeAgencias] = useState<listaDeAgenciasType[]>([]
     <div className="container m-auto p-3 space-y-3">
       <div className='p-6 max-w-2xl mx-auto bg-white rounded-xl shadow-lg items-center'>
         <h4 className='text-2xl text-blue-500 font-bold'>Agencia</h4>
-        <select className='flex-1 appearance-none p-2 my-5 border-2 w-full rounded-lg border-sky-500' name="Carteles" id="select">
-          {ListaDeAgencias && ListaDeAgencias.map((lista ) => (
-            <option key={lista.id} value={lista.agencia}>{lista.agencia}</option>
-          ))}
+        <div className='flex justify-between'>
+        <input className='my-4 flex-1' type='file' id='file_upload' ref={fileUpload} />
+        <button className='border rounded-lg py-1 px-1 bg-blue-300' type='button' id='button_upload' onClick={handleUpload}>Cargar</button>
+        </div>
+        <select 
+          className='flex-1 appearance-none p-2 my-5 border-2 w-full rounded-lg border-sky-500' 
+          name="Carteles" 
+          id="select"
+          onChange={handleSelect}>
+            {ListaDeAgencias && ListaDeAgencias.map((lista ) => (
+              <option key={lista.id} value={lista.id}>{lista.agencia}</option>
+            ))}
         </select>
       </div>
       <div className='p-6 max-w-2xl mx-auto bg-white rounded-xl shadow-lg items-center'>
