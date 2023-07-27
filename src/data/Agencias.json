@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "remitente": "Subsecretaria de Acceso a la Justicia",
+        "destinatario": "MINISTERIO DE GOBIERNO Y JUSTICIA   –  DIRECCION GENERAL DE     ACCESO A LA JUSTICIA",
+        "ciudad": "Chubut",
+        "direccion": "VACCHINA N° 178",
+        "retira": "Marcelo Cardoso  (DNI: 32777570)",
+        "observaciones": "CHUBUT – RAWSON (CP 9103)"
+    },
+    {
+        "id": 2,
+        "remitente": "Subsecretaria de Acceso a la Justicia",
+        "destinatario": "MINISTERIO DE GOBIERNO Y JUSTICIA   –  DIRECCION GENERAL DE     ACCESO A LA JUSTICIA",
+        "ciudad": "Chaco",
+        "direccion": "VACCHINA N° 178",
+        "retira": "Marcelo Cardoso  (DNI: 32777570)",
+        "observaciones": "CHUBUT – RAWSON (CP 9103)"
+    }
+]
