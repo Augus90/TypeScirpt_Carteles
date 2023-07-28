@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import { agenciaType, listaDeAgenciasType} from './types/types'
 import { mapearListaDeAgencias } from './TraerAgencias'
-import JsonAgencias from './data/Agencias.json'
 import { ImporData } from './data/importData'
 
 
@@ -21,33 +20,33 @@ function App() {
     }
   )
 
-const [ListaDeAgencias, setListaDeAgencias] = useState<listaDeAgenciasType[]>([])
+const [ListaDeAgencias, setListaDeAgencias] = useState<agenciaType[]>([])
 const fileUpload = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    // setListaDeAgencias( mapearListaDeAgencias() );
-
-    setAgencia(JsonAgencias[0])
-
-    // ImporData()
+    
   },[])
 
   const fillSelect = (data : agenciaType[]) => {
     console.log("Ciudad 1", data )
 
-    mapearListaDeAgencias(data);
+    setListaDeAgencias(mapearListaDeAgencias(data));
   }
 
   const handleSelect = (e : React.ChangeEvent<HTMLSelectElement>) => {
     console.log("Select", e.target.value)
+
+    setAgencia(ListaDeAgencias[e.target.value - 1])
+
   }
 
   const handleUpload = async () => {
     // console.log(fileUpload.current?.files);
     const files = fileUpload.current?.files[0]
 
-    if(files?.length == 0){
+    if(files?.length === 0){
       console.error("Error")
+      alert("El archivo no puede estar vacio")
     }
 
     const data : agenciaType[] = await ImporData(files);
@@ -74,6 +73,7 @@ const fileUpload = useRef<HTMLInputElement>(null)
           className='flex-1 appearance-none p-2 my-5 border-2 w-full rounded-lg border-sky-500' 
           name="Carteles" 
           id="select"
+          placeholder='Agencias'
           onChange={handleSelect}>
             {ListaDeAgencias && ListaDeAgencias.map((lista ) => (
               <option key={lista.id} value={lista.id}>{lista.agencia}</option>
