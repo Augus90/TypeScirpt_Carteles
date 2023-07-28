@@ -1,29 +1,29 @@
-import { agenciaType, listaDeAgenciasType} from './types/types'
+import { agenciaType} from './types/types'
 
-type listaType = {
-    id: number,
-    agencia: string
-}
+// type listaType = {
+//     id: number,
+//     agencia: string
+// }
 
+type rawType = (string | number | '')
 
-export const mapearListaDeAgencias = (agencias : [] ) => {
+export const mapearListaDeAgencias = (agencias : rawType[] ) : agenciaType[] => {
     let lista : agenciaType[] = []
 
-    const agenciaFiltrada = agencias.filter( agencia => typeof(agencia[0]) === 'number')
+    const agenciaFiltrada = agencias.filter( (agencia : rawType) => typeof(agencia[0]) === 'number')
 
     console.log("Agencias", agenciaFiltrada);
 
-    agenciaFiltrada.map( (agencia : (string | number | null))  => {
+    agenciaFiltrada.map( (agencia : rawType[])  => {
         lista = [...lista, 
           {
             id : agencia[0],
-            agencia : agencia[1],
+            ciudad : agencia[1],
             remitente: agencia[2],
             destinatario: agencia[3],
-            ciudad: agencia[4],
-            direccion: agencia[5],
-            retira: agencia[6],
-            observaciones: agencia[7],
+            direccion: agencia[4],
+            retira: agencia[5],
+            observaciones: agencia[6],
         }]
       })
 

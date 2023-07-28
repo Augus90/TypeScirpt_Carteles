@@ -2,7 +2,7 @@ import * as XLSX from "xlsx"
 
 // import "./Agencias.xlsx"
 
-export const ImporData = async (files) => {
+export const ImporData = async (files : File ) => {
     // const file : string = "./Agencias.xlsx"
 
     // let reader = new FileReader();
@@ -12,7 +12,7 @@ export const ImporData = async (files) => {
     const rawData = await files?.arrayBuffer()
     
     let workbook : XLSX.WorkBook
-    let data = []
+    let data : XLSX.WorkSheet= []
     try{
         workbook = XLSX.read(rawData, { type: "binary"})
         

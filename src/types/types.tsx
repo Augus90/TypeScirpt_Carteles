@@ -1,11 +1,11 @@
 export type agenciaType = {
-    id: number,
-    remitente?: string,
-    destinatario?: string,
-    ciudad: string,
-    direccion?: string,
-    retira?: string,
-    observaciones?: string,
+    id: (string | number | null),
+    remitente?: (string | number | null),
+    destinatario?: (string | number | null),
+    ciudad: (string | number | null),
+    direccion: (string | number | null),
+    retira: (string | number | null),
+    observaciones: (string | number | null),
   }
 
 export type listaDeAgenciasType = {
